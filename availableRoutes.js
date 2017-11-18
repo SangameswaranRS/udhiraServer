@@ -4,12 +4,20 @@
     var bodyParser=require('body-parser');
     var registrationController=require('./registrationController');
     var loginController=require('./loginController');
+    var getAllBloodGroupController=require('./getAllBloodGroupController');
+    var updateDonorInfoController=require('./updateDonorInfoController');
     var Router=express.Router();
     Router.post('/register',function (req,res) {
         registrationController.registerUser(req,res);
     });
     Router.post('/login',function (req,res) {
         loginController.onLoginInfoSubmit(req,res);
+    });
+    Router.get('/getAllBloodGroups',function (req,res) {
+        getAllBloodGroupController.fetchAllBloodGroups(req,res);
+    });
+    Router.post('/updateDonorInfo',function (req,res) {
+        updateDonorInfoController.updateDonorInfo(req,res);
     });
     module.exports=Router;
 })();
