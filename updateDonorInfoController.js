@@ -9,7 +9,9 @@
             dateOfBirth : req.body.dateOfBirth,
             donorWeight : req.body.donorWeight,
             gender : req.body.gender,
-            donationComments : req.body.donationComments
+            donationComments : req.body.donationComments,
+            donorEmailId : req.body.donorEmailId,
+            donorContactNumber : req.body.donorContactNumber
         };
         var userEmail=req.body.userEmailId;
         updateDonorInfoDAO.validateEmailId(userEmail,function (err,data) {
@@ -24,7 +26,7 @@
                if(!data[0]){
                    var failureJson={
                        statusCode : 346,
-                       message : "Register First to Signup as a donor"
+                       message : "Register First to register other donors"
                    }
                    res.status(346).send(failureJson);
                }else {

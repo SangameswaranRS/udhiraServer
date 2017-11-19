@@ -23,5 +23,8 @@
     Router.post('/raiseBloodRequest',function (req,res) {
         raiseBloodRequestController.onRequestSubmitted(req,res);
     });
+    Router.get('/getAllBloodRequests',function (req,res) {
+
+    });
     module.exports=Router;
 })();
