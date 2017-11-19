@@ -11,7 +11,7 @@ connection.connect(function (err,data) {
         console.log("Error connecting to database");
     }
     else{
-        console.log('connected to database- Udira');
+        console.log('connected to database- Udhira');
     }
 
 });

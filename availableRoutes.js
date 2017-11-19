@@ -8,6 +8,7 @@
     var updateDonorInfoController=require('./updateDonorInfoController');
     var raiseBloodRequestController=require('./raiseBloodRequestController');
     var getAllBloodRequestController=require('./getAllBloodRequestController');
+    var postSatisfiedBloodRequestController=require('./postSatisfiedBloodRequestController');
     var Router=express.Router();
     Router.post('/register',function (req,res) {
         registrationController.registerUser(req,res);
@@ -26,6 +27,9 @@
     });
     Router.get('/getAllBloodRequests',function (req,res) {
         getAllBloodRequestController.getAllBloodRequests(req,res);
+    });
+    Router.post('/postSatisfiedBloodRequest',function (req,res) {
+        postSatisfiedBloodRequestController.updateSatisStatus(req,res);
     });
     module.exports=Router;
 })();
