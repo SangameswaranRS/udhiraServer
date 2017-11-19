@@ -9,6 +9,7 @@
     var raiseBloodRequestController=require('./raiseBloodRequestController');
     var getAllBloodRequestController=require('./getAllBloodRequestController');
     var postSatisfiedBloodRequestController=require('./postSatisfiedBloodRequestController');
+    var isFirebaseSuperAdminController=require('./isFirebaseSuperAdminController');
     var Router=express.Router();
     Router.post('/register',function (req,res) {
         registrationController.registerUser(req,res);
@@ -30,6 +31,9 @@
     });
     Router.post('/postSatisfiedBloodRequest',function (req,res) {
         postSatisfiedBloodRequestController.updateSatisStatus(req,res);
+    });
+    Router.post('/checkFirebase',function (req,res) {
+        isFirebaseSuperAdminController.initAndCheckFirebase(req,res);
     });
     module.exports=Router;
 })();
