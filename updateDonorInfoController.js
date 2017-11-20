@@ -17,26 +17,26 @@
         updateDonorInfoDAO.validateEmailId(userEmail,function (err,data) {
            if(err){
                var failureJson={
-                   statusCode : 345,
+                   statusCode : 500,
                    message : err.message
                }
-               res.status(345).send(failureJson);
+               res.status(500).send(failureJson);
            }else {
                console.log(data);
                if(!data[0]){
                    var failureJson={
-                       statusCode : 346,
+                       statusCode : 500,
                        message : "Register First to register other donors"
                    }
-                   res.status(346).send(failureJson);
+                   res.status(500).send(failureJson);
                }else {
                    updateDonorInfoDAO.pushIntoDB(requestJson,function (err,data) {
                       if(err){
                           var failureJson={
-                              statusCode : 345,
+                              statusCode : 500,
                               message : err.message
                           }
-                          res.status(345).send(failureJson);
+                          res.status(500).send(failureJson);
                       }else {
                           var successJson={
                               statusCode : 200,

@@ -9,6 +9,7 @@
         userEmailId=req.body.userEmailId;
         userImei=req.body.imeiIndex;
         loginDAO.getUserRecord(req.body.userEmailId,function (err,data) {
+            if(data.length>0){
             if(err){
                 var errorResponse={
                     statusCode : 341,
@@ -17,6 +18,7 @@
                 res.status(341).send(errorResponse);
                 console.log(err);
             }else {
+                console.log(data);
                var newList=under.map(data,function (dat) {
                    return {
                        name : dat.userName,
@@ -53,22 +55,28 @@
                            });
                        }else {
                            var failureResponse={
-                               statusCode : 201,
                                message : "login from multiple Devices blocked"
                            };
-                           res.send(failureResponse);
+                           res.status(500).send(failureResponse);
                        }
                    }
 
                }else {
                    var failureResponse={
-                       statusCode : 202,
+                       statusCode : 500,
                        message : "Passwords dont match"
                    };
-                   res.status(202).send(failureResponse);
+                   res.status(500).send(failureResponse);
                }
 
 
+            }
+            }else{
+                var failureJson={
+                    statusCode : 500,
+                    message : "User doesnot Exist"
+                };
+                res.status(500).send(failureJson);
             }
         })
     }
