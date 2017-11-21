@@ -19,19 +19,19 @@
            if(err){
                console.log(err);
                var failureJson={
-                   statusCode : 345,
+                   statusCode : 500,
                    message : err.message
                };
-               res.status(345).send(failureJson);
+               res.status(500).send(failureJson);
            } else {
                console.log("control here");
                console.log(data);
                if(data.length<=0){
                    var failureJson={
-                       statusCode : 345,
+                       statusCode : 500,
                        message : "User not registered"
                    };
-                   res.status(345).send(failureJson);
+                   res.status(500).send(failureJson);
                }
                else {
                    console.log("enga eruken");
@@ -40,10 +40,10 @@
                    raiseBloodRequestDAO.enterBloodRequest(postParams,function (err,data) {
                        if(err){
                            var errJson={
-                               statusCode : 333,
+                               statusCode : 500,
                                message : err.message
                            };
-                           res.status(333).send(errJson);
+                           res.status(500).send(errJson);
                        }else{
                            var successJson={
                                statusCode : 200,
@@ -55,10 +55,10 @@
                    })
                }else {
                    var failureJson = {
-                       statusCode: 345,
+                       statusCode: 500,
                        message: "User not authenticated to raise requests"
                    };
-                   res.status(345).send(failureJson);
+                   res.status(500).send(failureJson);
                }
            }}
         });

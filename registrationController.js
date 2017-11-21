@@ -15,19 +15,18 @@
     registerDAO.enterDataIntoDB(jsonBody,function (err,data) {
        if(err){
           var errorResponse={
-              statusCode : 341,
+              statusCode : 500,
               message : err.message
-          } ;
-           res.status(341).send(errorResponse);
+          };
+           res.status(500).send(errorResponse);
            console.log(err);
-       } else{
+       }else{
            var successResponse={
                statusCode : 200,
                message : "Successfully Inserted"
-           }
+           };
            res.send(successResponse);
        }
     });
     }
-
 })();

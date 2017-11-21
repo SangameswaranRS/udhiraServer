@@ -11,7 +11,8 @@
             gender : req.body.gender,
             donationComments : req.body.donationComments,
             donorEmailId : req.body.donorEmailId,
-            donorContactNumber : req.body.donorContactNumber
+            donorContactNumber : req.body.donorContactNumber,
+            donorName : req.body.donorName
         };
         var userEmail=req.body.userEmailId;
         updateDonorInfoDAO.validateEmailId(userEmail,function (err,data) {
