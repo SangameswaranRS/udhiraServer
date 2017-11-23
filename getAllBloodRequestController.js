@@ -1,20 +1,60 @@
 (function () {
     var getAllBloodRequestDAO=require('./getAllBloodRequestDAO');
+    var bodyParser=require('body-parser');
+    var admin=require('firebase-admin');
     module.exports.getAllBloodRequests=function (req,res) {
-        getAllBloodRequestDAO.getData(function (err,data) {
-           if(err){
-               var failureJson={
-                   statusCode : 367,
-                   message : err.message
+        var userName = req.body.userName;
+        var password = req.body.password;
+        var db=admin.database();
+        var ref=db.ref("/Admins/"+userName);
+        ref.once("value",function (snapshot) {
+           console.log(snapshot.val());
+           var adminJson=snapshot.val();
+           if(adminJson!==null){
+               if(password===adminJson.password){
+                   console.log("Passwords match");
+                   if(adminJson.isSuperAdmin==='1'){
+                       console.log("user is a super admin");
+                       getAllBloodRequestDAO.getData(function (err,data) {
+                            if(err){
+                                var failureJson4={
+                                    statusCode : 500,
+                                    message : err.message
+                                };
+                                res.status(500).send(failureJson4);
+                            }else {
+                                var successJson= {
+                                    statusCode: 200,
+                                    message: data
+                                };
+                                res.send(successJson);
+                            }
+
+                       });
+                   }else {
+                       console.log("user passwords match but user is not a super admin");
+                       var failureJson1={
+                           statusCode : 500,
+                           message: "User is not a super Admin"
+                       };
+                       res.status(500).send(failureJson1);
+                   }
+
+               }else {
+                   var failureJson2={
+                       statusCode : 500,
+                       message : "Wrong Password entered"
+                   };
+                   res.status(500).send(failureJson2);
                }
-               res.status(367).send(failureJson);
-           } else{
-               var successJson={
-                   statusCode : 200,
-                   message : data
-               }
-               res.send(successJson);
+           }else{
+               var failureJson= {
+                   statusCode: 500,
+                   message : "Such username does not exist"
+               }    ;
+               res.status(500).send(failureJson);
            }
+
         });
     }
 })();
