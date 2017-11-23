@@ -21,10 +21,10 @@
                 }else
                 {
                     var fail={
-                        statusCode : 202,
+                        statusCode : 500,
                         message : "not a super Admin"
                     }
-                    res.status(202).send(fail);
+                    res.status(500).send(fail);
                 }
             }else
             {
@@ -36,10 +36,10 @@
             }
             }else{
                 var failureJson1={
-                    statusCode : 402,
+                    statusCode : 404,
                     message : "username does not exist in admin database"
                 }
-                res.status(402).send(failureJson1);
+                res.status(404).send(failureJson1);
             }
         },function (errorObject) {
            console.log(errorObject);
