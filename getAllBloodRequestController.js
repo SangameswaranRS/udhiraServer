@@ -8,13 +8,10 @@
         var db=admin.database();
         var ref=db.ref("/Admins/"+userName);
         ref.once("value",function (snapshot) {
-           console.log(snapshot.val());
            var adminJson=snapshot.val();
            if(adminJson!==null){
                if(password===adminJson.password){
-                   console.log("Passwords match");
                    if(adminJson.isSuperAdmin==='1'){
-                       console.log("user is a super admin");
                        getAllBloodRequestDAO.getData(function (err,data) {
                             if(err){
                                 var failureJson4={

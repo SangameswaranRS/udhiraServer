@@ -1,5 +1,6 @@
 var express=require('express');
 var app=express();
+var logger = require('morgan');
 var admin = require("firebase-admin");
 var serviceAccount = require("./nccarmy-3d81c-firebase-adminsdk-sxmpo-e3ff39bf0c.json");
 var connection=require('./connection');
@@ -11,6 +12,7 @@ app.use(function (req,res,next) {
         'Authorization');
     next();
 });
+app.use(logger('dev'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(bodyParser.json({type:'application/vnd.api+json'}));

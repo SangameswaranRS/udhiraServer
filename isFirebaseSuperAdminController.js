@@ -7,11 +7,9 @@
         var db=admin.database();
         var ref=db.ref("/Admins/"+userName);
         ref.once("value",function (snapshot) {
-            console.log(snapshot.val());
             var json=snapshot.val();
             if(json !== null){
             if(json.password === password){
-                console.log("passwords match");
                 if(json.isSuperAdmin === '1'){
                     var successJson={
                         statusCode : 200,

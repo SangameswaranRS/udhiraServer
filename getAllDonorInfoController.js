@@ -9,13 +9,10 @@
         var db=admin.database();
         var reference=db.ref("/Admins/"+userName);
         reference.once("value",function (snapshot) {
-           console.log(snapshot.val());
            var adminJson=snapshot.val();
            if(adminJson !==null){
                if(password === adminJson.password){
-                   console.log("passwords match");
                    if(adminJson.isSuperAdmin==='1'){
-                       console.log("User is a super admin");
                        getAllDonorInfoDAO.getDonorInfoFromTable(function (err,data) {
                           if(err){
                               var failureJson4={
