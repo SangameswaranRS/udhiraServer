@@ -1,7 +1,7 @@
 (function () {
     var connection=require('./connection');
     module.exports.validateFlag=function (userEmailId,callBack) {
-        connection.query("select canRaiseRequestFlag from userInfo where userEmailId= ?",userEmailId,function (err,data) {
+        connection.query("select canRaiseRequestFlag from userinfo where userEmailId= ?",userEmailId,function (err,data) {
            callBack(err,data);
         });
     }
