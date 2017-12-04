@@ -12,7 +12,28 @@ app.use(function (req,res,next) {
         'Authorization');
     next();
 });
-app.use(logger('dev'));
+app.use(function (req,res,next) {
+    if(connection.state === 'disconnected') {
+        console.log('server down Attempting Reconnection');
+        connection.connect(function (err) {
+           if(err){
+               console.log('error connecting to database');
+               var connErrJson={
+                  statusCode : 500,
+                   message : 'Database Server down'
+               };
+               res.status(500).send(connErrJson);
+           } else{
+               console.log('connected to database');
+               next();
+           }
+        });
+    }else{
+           console.log('server up no problem');
+        next();
+    }
+});
+app.use(logger('combined'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(bodyParser.json({type:'application/vnd.api+json'}));

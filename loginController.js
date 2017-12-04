@@ -10,7 +10,7 @@
         userImei=req.body.imeiIndex;
         loginDAO.getUserRecord(req.body.userEmailId,function (err,data) {
             console.log(data);
-            if(data !==null) {
+            if(typeof data !=="undefined") {
                 if (data.length > 0) {
                     if (err) {
                         var errorResponse = {
